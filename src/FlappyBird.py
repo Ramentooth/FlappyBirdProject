@@ -16,6 +16,7 @@ MOUSEBUTTONUP = False
 MOUSEBUTTONDOWN = False
 SPACECLICKED = False
 pygame.display.set_caption('FLAPPY BIRD by Simon Sakata 3B 2026')
+clock = pygame.time.Clock()
 
 running = True
 while running:
@@ -67,4 +68,4 @@ while running:
             
 
     pygame.display.flip()
-
+    clock.tick(60)
