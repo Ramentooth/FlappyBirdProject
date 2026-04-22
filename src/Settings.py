@@ -1,4 +1,5 @@
 import pygame
+pygame.font.init()
 
 # SCREEN VARIABLES
 screenH = 700
@@ -14,4 +15,7 @@ pipeW = 100
 rimW = 10
 rimL = 30
 pipeC = (0, 255, 100)
+
+# TEXT
+font = pygame.font.SysFont(None, 64)
 
