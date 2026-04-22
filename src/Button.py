@@ -1,14 +1,15 @@
 import pygame
-from Settings import screenH, screenL, speed
+from Settings import screenH, screenL, speed, font
 
 class Buttons:
-    def __init__(self,x,y,w,h,cMain,cDown): #cText,cShade
+    def __init__(self,x,y,w,h,cMain,cDown,text): #cText,cShade
         self.x = x
         self.y = y
         self.w = w
         self.h = h
         self.cMain = cMain
         self.cDown = cDown
+        self.text = text
         self.clickedVal = False
         self.display = True
         #self.cText = cText
@@ -18,7 +19,10 @@ class Buttons:
         if self.display:
             if (self.x - self.w/2) <= mousX <= ((self.x - self.w/2) + self.w) and (self.y - self.h/2) <= mousY <= ((self.y - self.h/2) + self.h):
                 pygame.draw.rect(screen, self.cDown, ((self.x - self.w/2), (self.y - self.h/2), self.w, self.h), 0, 20)
-                if MOUSEBUTTONDOWN and MOUSEBUTTONUP != True:
+                Bfont = pygame.font.SysFont(None,64)
+                Btext = Bfont.render(self.text, True, (0))
+                screen.blit(Btext,(self.x,self.y + self.h/4))
+                if MOUSEBUTTONDOWN and MOUSEBUTTONUP != True or otherStartVal:
                     self.clickedVal = True
                     self.display = False
             elif otherStartVal:
