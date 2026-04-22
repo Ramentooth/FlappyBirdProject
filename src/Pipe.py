@@ -8,16 +8,16 @@ class Pipe:
         self.y = y
         self.type = type
         self.spaceGen = random.randint(50,450)
+
     def movePipes(self):
         self.x -= speed
-        if self.x == -pipeW:
+        if self.x <= -pipeW:
             self.x += screenL + 100
             self.spaceGen = random.randint(50,450)
 
-
-
     def displayPipes(self):
         pass
+
     def makePipes(self):
         topL = self.spaceGen
         bottomY = topL + gap 
@@ -26,4 +26,6 @@ class Pipe:
         topRim = (self.x - rimW, topL - rimL, pipeW + rimW + rimW, rimL)
         bottom = (self.x, bottomY, pipeW, bottomL)
         bottomRim = (self.x - rimW, bottomY, pipeW + rimW + rimW, rimL)
-        yield top, bottom, topRim, bottomRim
+        scoreRect = (self.x + pipeW, topL, 20, gap)
+        resetRect = (self.x, topL, 20, gap)
+        yield top, bottom, topRim, bottomRim, scoreRect, resetRect
