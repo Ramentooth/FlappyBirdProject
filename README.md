@@ -67,3 +67,8 @@ python FlappyBird.py
 ```
 
 > Requires Python 3.x and Pygame.
+### Credits
+
+* SFX: https://pixabay.com/sound-effects/search/flap/
+* Bird picture: my mom
+* background: https://mungfali.com/post/D95842A662F978B00FC85138C37F7EC0C914D06E/A10FE8976CEDA675DC0F6BAC06A4B9990E9C8DC8?utm_source=Pinterest&utm_medium=organic
