@@ -20,8 +20,8 @@ class Buttons:
     def drawButton(self, screen, mousX, mousY, MOUSEBUTTONUP, MOUSEBUTTONDOWN, SPACECLICKED):
         if self.display:
             if (self.x - self.w/2) <= mousX <= ((self.x - self.w/2) + self.w) and (self.y - self.h/2) <= mousY <= ((self.y - self.h/2) + self.h):
-                pygame.draw.rect(screen, self.cDown, ((self.x - self.w/2), (self.y - self.h/2), self.w, self.h), self.cButtonDown, 20)
-                Bfont = pygame.font.SysFont(None,64)
+                pygame.draw.rect(screen, self.cDown, ((self.x - self.w/2), (self.y - self.h/2), self.w, self.h), self.cDown, 20)
+                Bfont = pygame.font.SysFont(None,32)
                 Btext = Bfont.render(self.text, True, (0,0,0), (255,255,255))
                 textRect = Btext.get_rect(center=(self.x,self.y))
                 screen.blit(Btext,textRect)
@@ -32,8 +32,11 @@ class Buttons:
                 self.clickedVal = True
                 self.display = False
             else:
-                pygame.draw.rect(screen, self.cMain, ((self.x - self.w/2), (self.y - self.h/2), self.w, self.h), self.cButton, 20)
-            
+                pygame.draw.rect(screen, self.cMain, ((self.x - self.w/2), (self.y - self.h/2), self.w, self.h), 0, 20)
+                Bfont = pygame.font.SysFont(None,32)
+                Btext = Bfont.render(self.text, True, (0,0,0), (255,255,255))
+                textRect = Btext.get_rect(center=(self.x,self.y))
+                screen.blit(Btext,textRect)
     def gravity():
         pass
         
