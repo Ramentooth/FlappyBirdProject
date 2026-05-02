@@ -14,11 +14,11 @@ Pipe(1700, 0 , "pipe"),
 Pipe(2200, 0 , "pipe")
 ]
 bird1 = Bird(500, 500, 50, 50, "none")
-startB = Buttons((screenL/2), (screenH/2), 100, 100, 255, 255, 'START')
-field = Background(0,0,'fieldBG.jpeg')
+startB = Buttons((screenL/2), (screenH/2), 100, 100, 255, 100, 'START', 0, (0,255,0), (25,255,25))
+field = Background(0,0,'fieldBG.png')
 gameOverScreen = Background(0,0,'FlappyGameOver.jpeg')
-replayB = Buttons((screenL/2), (screenH/2), 100, 100, 255, 255, 'PLAY AGAIN')
-quitB = Buttons((screenL/2), (screenH/2 + 200), 100, 100, 255, 255, 'QUIT')
+replayB = Buttons((screenL/2), (screenH/2), 100, 100, 255, 100, 'AGAIN', 0, (0,255,0), (25,255,25))
+quitB = Buttons((screenL/2), (screenH/2 + 200), 100, 100, 255, 100, 'QUIT', 0, (0,255,0), (25,255,25))
 
 clock = pygame.time.Clock()
 
@@ -28,6 +28,7 @@ SPACECLICKED = False
 score = 0
 canScore = False
 gameOver = False
+paused = False
 
 pygame.display.set_caption('FLAPPY BIRD by Simon Sakata 3B 2026')
 
@@ -61,7 +62,7 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == 32:
                 SPACECLICKED = True
-    if startB.clickedVal: #initiates running game after start button is pressed
+    if startB.clickedVal and gameOver != True: #initiates running game after start button is pressed
         field.moveBG()
 
         text = font.render(f"Score: {score}", True, (0))
@@ -85,8 +86,8 @@ while running:
                 resetRec = pygame.Rect(resetRect)
 
             Bird.gravity(bird1,SPACECLICKED)
-            pygame.draw.rect(screen, (255,0,0), Bird.drawBird(bird1)) # draws visible bird
-            birdRect = pygame.Rect(Bird.drawBird(bird1)) # draws collsion rectangle for bird
+            screen.blit(bird1.birdImage(), (bird1.x-50, bird1.y-50)) # draws visible bird
+            birdRect = pygame.Rect(Bird.birdPos(bird1)) # draws collsion rectangle for bird
             if birdRect.colliderect(resetRec):
                 canScore = True
             elif canScore:
@@ -98,12 +99,16 @@ while running:
             if birdRect.colliderect(topPipeRect) or birdRect.colliderect(bottomPipeRect) or birdRect.colliderect(floor) or birdRect.colliderect(roof):
                 replayB.clickedVal = False
                 gameOver = True
+                paused = True
+                if paused:
+                    #pygame.time.wait(1000)
+                    paused = False
                     
     if gameOver:
         screen.blit(gameOverScreen.Sbg,(gameOverScreen.x, gameOverScreen.y))
         replayB.display = True
         quitB.display = True
-        Buttons.drawButton(replayB, screen, mousX, mousY, MOUSEBUTTONUP, MOUSEBUTTONDOWN, SPACECLICKED)
+        Buttons.drawButton(replayB, screen, mousX, mousY, MOUSEBUTTONUP, MOUSEBUTTONDOWN, None)
         if replayB.clickedVal:
             gameOver = False
             pipes = [
